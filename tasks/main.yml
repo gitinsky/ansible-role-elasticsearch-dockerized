@@ -15,7 +15,7 @@
   template: src=consul.json dest=/root/elasticsearch-dockerized/consul.json
 
 - name: put run
-  template: src=run dest=/root/elasticsearch-dockerized/run
+  template: src=run dest=/root/elasticsearch-dockerized/run mode=0755
 
 - name: build a Docker image for Elasticsearch
   command: docker build -t gitinsky/elasticsearch:0.1.0 --rm /root/elasticsearch-dockerized
