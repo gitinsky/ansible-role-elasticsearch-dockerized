@@ -5,9 +5,6 @@
 - name: put Dockerfile
   template: src=Dockerfile dest=/root/elasticsearch-dockerized/Dockerfile
 
-- name: put elasticsearch.yml
-  template: src=elasticsearch.yml dest=/root/elasticsearch-dockerized/elasticsearch.yml
-
 - name: put elasticsearch_config.sh
   template: src=elasticsearch_config.sh dest=/root/elasticsearch-dockerized/elasticsearch_config.sh
 
@@ -17,20 +14,11 @@
 - name: put consul.json
   template: src=consul.json dest=/root/elasticsearch-dockerized/consul.json
 
-- name: put consul.rb
-  template: src=consul.rb dest=/root/elasticsearch-dockerized/consul.rb
+- name: put run
+  template: src=run dest=/root/elasticsearch-dockerized/run
 
 - name: build a Docker image for Elasticsearch
   command: docker build -t gitinsky/elasticsearch:0.1.0 --rm /root/elasticsearch-dockerized
 
 - name: tag it as latest
   command: docker build -t gitinsky/elasticsearch:latest --rm /root/elasticsearch-dockerized
-
-- name: check if an elasticsearch container is started
-  command: bash -c "docker ps | grep elasticsearch"
-  ignore_errors: True
-  register: result
-
-- name: start an elasticsearch container
-  command: docker run -d -h es-{{ ansible_hostname }} --dns {{ ansible_docker0.ipv4.address }} --dns 8.8.8.8 --dns-search service.consul -p=9200:9200 -p=9300:9300 -name elasticsearch gitinsky/elasticsearch:0.1.0
-  when: result|failed
