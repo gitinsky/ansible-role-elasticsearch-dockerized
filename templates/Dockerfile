@@ -16,16 +16,16 @@ RUN \
   wget https://dl.bintray.com/mitchellh/consul/0.5.0_web_ui.zip -O /tmp/webui.zip && \
   mkdir /ui && cd /ui && unzip /tmp/webui.zip && rm /tmp/webui.zip && mv dist/* . && rm -rf dist && \
   wget https://get.docker.io/builds/Linux/x86_64/docker-1.5.0 -O /bin/docker && \
+  mkdir /etc/service/elasticsearch && \
   chmod +x /bin/docker
-
-COPY elasticsearch.yml /elasticsearch/config/elasticsearch.yml
 
 COPY elasticsearch_config.sh /opt/elasticsearch_config.sh
 RUN chmod +x /opt/elasticsearch_config.sh
 
-ADD ./consul-start /bin/start
-ADD ./consul.json /config/consul.json
+ADD ./run /etc/service/elasticsearch/run
+#ADD ./consul.json /config/consul.json
 
-COPY consul.rb /etc/eye/consul.rb
+#COPY consul.rb /etc/eye/consul.rb
+#COPY elasticsearch.rb /etc/eye/elasticsearch.rb
 
 EXPOSE 9200 9300 8300 8301 8301/udp 8302 8302/udp 8400 8500
