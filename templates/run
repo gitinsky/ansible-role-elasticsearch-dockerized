@@ -1,0 +1,5 @@
+#!/bin/sh
+set -e
+JAVA_HOME=/jdk1.8.0_31/
+export JAVA_HOME
+exec /elasticsearch/bin/elasticsearch --config=/elasticsearch/config/elasticsearch.yml
