@@ -36,13 +36,20 @@
     - es
 
 - name: build a Docker image for Elasticsearch
-  command: docker build -t gitinsky/elasticsearch:0.1.0 --rm /root/elasticsearch-dockerized
+  docker_image:
+    path:  /root/elasticsearch-dockerized
+    name:  gitinsky/elasticsearch
+    tag:   0.1.0
+    state: present
   tags:
     - docker
     - es
 
 - name: tag it as latest
-  command: docker build -t gitinsky/elasticsearch:latest --rm /root/elasticsearch-dockerized
+  docker_image:
+    path:  /root/elasticsearch-dockerized
+    name:  gitinsky/elasticsearch
+    state: build
   tags:
     - docker
     - es
