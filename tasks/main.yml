@@ -40,7 +40,7 @@
     path:  /root/elasticsearch-dockerized
     name:  gitinsky/elasticsearch
     tag:   0.1.0
-    state: present
+    state: build
   tags:
     - docker
     - es

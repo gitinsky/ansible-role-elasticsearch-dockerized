@@ -21,6 +21,7 @@ RUN \
 
 COPY elasticsearch_config.sh /opt/elasticsearch_config.sh
 RUN chmod +x /opt/elasticsearch_config.sh
+RUN rm -v /elasticsearch/config/elasticsearch.yml
 
 ADD ./run /etc/service/elasticsearch/run
 #ADD ./consul.json /config/consul.json
