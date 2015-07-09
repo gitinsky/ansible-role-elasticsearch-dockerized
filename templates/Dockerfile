@@ -1,4 +1,4 @@
-FROM gitinsky/oracle-java-8:0.1.0
+FROM gitinsky/oracle-java-8:0.1.6
 MAINTAINER Git In Sky <support@gitinsky.com>
 
 ENV ES_PKG_NAME elasticsearch-1.4.2
