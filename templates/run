@@ -1,3 +1,5 @@
 #!/bin/sh
 set -e
-exec /elasticsearch/bin/elasticsearch --config=/elasticsearch/config/elasticsearch.yml
+chown -R elasticsearch:elasticsearch /elasticsearch/data
+chown -R elasticsearch:elasticsearch /elasticsearch/logs
+exec sudo -E -u elasticsearch /elasticsearch/bin/elasticsearch --config=/elasticsearch/config/elasticsearch.yml
