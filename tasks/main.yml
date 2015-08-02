@@ -18,7 +18,7 @@
   template: src=run dest=/root/elasticsearch-dockerized/run mode=0755
 
 - name: build a Docker image for Elasticsearch
-  command: docker build -t gitinsky/elasticsearch:0.1.1 --rm /root/elasticsearch-dockerized
+  command: docker build -t gitinsky/elasticsearch:0.1.2 --rm /root/elasticsearch-dockerized
 
 - name: tag it as latest
   command: docker build -t gitinsky/elasticsearch:latest --rm /root/elasticsearch-dockerized
