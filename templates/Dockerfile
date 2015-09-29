@@ -21,8 +21,12 @@ RUN \
 
 COPY elasticsearch_config.sh /opt/elasticsearch_config.sh
 RUN chmod +x /opt/elasticsearch_config.sh
+# install bigdesk plugin
+RUN JAVA_HOME=/jdk1.8.0_40/ && \
+    export JAVA_HOME && \
+    /elasticsearch/bin/plugin -install lukas-vlcek/bigdesk
+# remove config as we're going to mount it on run
 RUN rm -v /elasticsearch/config/elasticsearch.yml
-
 ADD ./run /etc/service/elasticsearch/run
 #ADD ./consul.json /config/consul.json
 
