@@ -1,7 +1,7 @@
 FROM gitinsky/oracle-java-8:0.1.1
 MAINTAINER Git In Sky <support@gitinsky.com>
 
-ENV ES_PKG_NAME elasticsearch-1.4.2
+ENV ES_PKG_NAME elasticsearch-{{ es_version }}
 
 RUN \
   apt-get install unzip && \
