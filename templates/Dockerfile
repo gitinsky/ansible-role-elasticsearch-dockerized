@@ -24,7 +24,9 @@ RUN chmod +x /opt/elasticsearch_config.sh
 # install bigdesk plugin
 RUN JAVA_HOME=/jdk1.8.0_40/ && \
     export JAVA_HOME && \
-    /elasticsearch/bin/plugin -install lukas-vlcek/bigdesk
+    /elasticsearch/bin/plugin -install lukas-vlcek/bigdesk && \
+    /elasticsearch/bin/plugin -install royrusso/elasticsearch-HQ && \
+    /elasticsearch/bin/plugin -install polyfractal/elasticsearch-segmentspy
 # remove config as we're going to mount it on run
 RUN rm -v /elasticsearch/config/elasticsearch.yml
 ADD ./run /etc/service/elasticsearch/run
