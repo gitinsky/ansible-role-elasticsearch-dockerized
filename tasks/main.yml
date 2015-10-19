@@ -1,24 +1,55 @@
 ---
 - name: make a build dir
   file: state=directory name=/root/elasticsearch-dockerized
+  tags:
+    - docker
+    - es
 
 - name: put Dockerfile
   template: src=Dockerfile dest=/root/elasticsearch-dockerized/Dockerfile
+  tags:
+    - docker
+    - es
 
 - name: put elasticsearch_config.sh
   template: src=elasticsearch_config.sh dest=/root/elasticsearch-dockerized/elasticsearch_config.sh
+  tags:
+    - docker
+    - es
 
 - name: put consul-start
   template: src=consul-start dest=/root/elasticsearch-dockerized/consul-start mode=0755
+  tags:
+    - docker
+    - es
 
 - name: put consul.json
   template: src=consul.json dest=/root/elasticsearch-dockerized/consul.json
+  tags:
+    - docker
+    - es
 
 - name: put run
   template: src=run dest=/root/elasticsearch-dockerized/run mode=0755
+  tags:
+    - docker
+    - es
 
 - name: build a Docker image for Elasticsearch
-  command: docker build -t gitinsky/elasticsearch:0.1.2 --rm /root/elasticsearch-dockerized
+  docker_image:
+    path:  /root/elasticsearch-dockerized
+    name:  gitinsky/elasticsearch
+    tag:   "{{ es_version }}.0"
+    state: build
+  tags:
+    - docker
+    - es
 
 - name: tag it as latest
-  command: docker build -t gitinsky/elasticsearch:latest --rm /root/elasticsearch-dockerized
+  docker_image:
+    path:  /root/elasticsearch-dockerized
+    name:  gitinsky/elasticsearch
+    state: build
+  tags:
+    - docker
+    - es
